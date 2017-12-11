@@ -1,0 +1,6 @@
+The average greedy makespan with 100 processes is: 581665
+The average greedy decreasing makespan with 100 processes is: 513912
+The average greedy makespan with 500 processes is: 244455
+The average greedy decreasing makespan with 100 processes is: 227081
+The average greedy makespan with 1000 processes is: 166852
+The average greedy decreasing makespan with 1000 processes is: 156090

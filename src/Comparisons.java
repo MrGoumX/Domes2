@@ -148,7 +148,7 @@ public class Comparisons {
         System.out.println("The average greedy decreasing makespan with 100 processes is: " + AvGreedDecMakespan500);
         System.out.println("The average greedy makespan with 1000 processes is: " + AvGreedMakespan1000);
         System.out.println("The average greedy decreasing makespan with 1000 processes is: " + AvGreedDecMakespan1000);
-        Writer writer = new OutputStreamWriter(new FileOutputStream("Comparisons.txt"), "UTF-8");
+        Writer writer = new OutputStreamWriter(new FileOutputStream("src/data/Comparisons.txt"), "UTF-8");
         writer.write("The average greedy makespan with 100 processes is: " + AvGreedMakespan100 +"\n");
         writer.write("The average greedy decreasing makespan with 100 processes is: " + AvGreedDecMakespan100 +"\n");
         writer.write("The average greedy makespan with 500 processes is: " + AvGreedMakespan500 +"\n");
