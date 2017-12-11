@@ -70,6 +70,12 @@ public interface ListInt<T> {
     public void printList(PrintStream stream);
 
     /**
+     * method that compiles a string of data from the list
+     * @return the list as a string
+     */
+    public String toString();
+
+    /**
      * return the size of the queue, 0 if empty
      * @return number of elements in the list
      */

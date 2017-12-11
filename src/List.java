@@ -89,15 +89,27 @@ public class List<T> implements ListInt<T> {
     @Override
     public void printList(PrintStream stream) {
         if (isEmpty()) {
-            System.out.printf("The CharDoubleEndedQueue is empty\n");
+            System.out.printf("The List is empty\n");
             return;
         }
         ListNode<T> temp = first;
-        while (temp != null) {
+        while(temp != null) {
             System.out.printf("%s ", temp.getData());
             temp = temp.getNext();
         }
         System.out.printf("\n");
+    }
+
+    @Override
+    public String toString(){
+        if(isEmpty()) return null;
+        ListNode<T> temp = first;
+        String ret = "";
+        while(temp!=null){
+            ret += temp.getData() + " ";
+            temp = temp.getNext();
+        }
+        return ret;
     }
 
     @Override

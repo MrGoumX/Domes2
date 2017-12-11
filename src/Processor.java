@@ -23,6 +23,10 @@ public class Processor implements Comparable<Processor>{
         return time;
     }
 
+    public int getID(){
+        return id;
+    }
+
     @Override
     public int compareTo(Processor o) {
         if(getActiveTime() > o.getActiveTime()){
