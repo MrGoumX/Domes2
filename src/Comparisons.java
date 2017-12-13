@@ -82,7 +82,9 @@ public class Comparisons {
             for(int i = 0; i < nops; i++){
                 try{
                     int span = Integer.parseInt(data.readLine());
-                    pcs.getMin().getList().addLast(span);
+                    Processor min = pcs.getMin();
+                    min.getList().addLast(span);
+                    pcs.sink(1);
                 }catch(IOException e){
                     e.printStackTrace();
                 }
@@ -131,7 +133,9 @@ public class Comparisons {
             Sort<Integer> QC = new Sort<Integer>();
             QC.sort(procs, 0, procs.length-1);
             for(int i = 0; i < procs.length; i++){
-                pcs.getMin().getList().addLast(procs[i]);
+                Processor min = pcs.getMin();
+                min.getList().addLast(procs[i]);
+                pcs.sink(1);
             }
             for (int i = 0; i < nop; i++) {
                 Processor temp = pcs.removeMin();
