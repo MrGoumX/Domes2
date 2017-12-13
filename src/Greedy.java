@@ -8,7 +8,7 @@ public class Greedy {
         MaxPQ<Processor> pcs = null;
         int nop = 0, nops = 0, makespan = 0;
         try{
-            data = new BufferedReader(new FileReader("src/data/data1.txt"));
+            data = new BufferedReader(new FileReader("src/data/simple.txt"));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -31,7 +31,7 @@ public class Greedy {
             for(int i = 0; i < nops; i++){
                 try{
                     int span = Integer.parseInt(data.readLine());
-                    pcs.getMin().processed_jobs.addLast(span);
+                    pcs.getMin().getList().addLast(span);
                 }catch(IOException e){
                     e.printStackTrace();
                 }
@@ -39,7 +39,7 @@ public class Greedy {
         }
         for (int i = 0; i < nop; i++) {
             Processor temp = pcs.removeMin();
-            System.out.println("id " + temp.getID() + ", load=" + temp.getActiveTime() + ": " + temp.processed_jobs.toString());
+            System.out.println("id " + temp.getID() + ", load=" + temp.getActiveTime() + ": " + temp.getList().toString());
             if(temp.getActiveTime()>makespan) makespan = temp.getActiveTime();
         }
         System.out.println("Makespan = " + makespan);

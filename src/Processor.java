@@ -1,7 +1,7 @@
 public class Processor implements Comparable<Processor>{
     private static int processors;
     private int id;
-    protected List<Integer> processed_jobs = new List<Integer>();
+    private List<Integer> processed_jobs = new List<Integer>();
 
     Processor(){
         id = processors;
@@ -21,6 +21,10 @@ public class Processor implements Comparable<Processor>{
             }
         }
         return time;
+    }
+
+    public List<Integer> getList(){
+        return processed_jobs;
     }
 
     public int getID(){

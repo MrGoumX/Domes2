@@ -43,11 +43,6 @@ public class MaxPQ<T> implements MaxPQInt<T>{
         return min;
     }
 
-    public T getMax(){
-        if(size==0) throw new IllegalStateException();
-        return heap[size];
-    }
-
     private void swim(int i){
         while(i > 1){
             if(cmp.compare(heap[i/2], heap[i])>0) swap(i, i/2);

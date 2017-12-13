@@ -9,7 +9,7 @@ public class GreedyDec {
         Integer procs[];
         int nop = 0, nops = 0, makespan = 0;
         try{
-            data = new BufferedReader(new FileReader("src/data/data1.txt"));
+            data = new BufferedReader(new FileReader("src/data/simple.txt"));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -39,11 +39,11 @@ public class GreedyDec {
             Sort<Integer> QC = new Sort<Integer>();
             QC.sort(procs, 0, procs.length-1);
             for(int i = 0; i < procs.length; i++){
-                pcs.getMin().processed_jobs.addLast(procs[i]);
+                pcs.getMin().getList().addLast(procs[i]);
             }
             for (int i = 0; i < nop; i++) {
                 Processor temp = pcs.removeMin();
-                System.out.println("id " + temp.getID() + ", load=" + temp.getActiveTime() + ": " + temp.processed_jobs.toString());
+                System.out.println("id " + temp.getID() + ", load=" + temp.getActiveTime() + ": " + temp.getList().toString());
                 if(temp.getActiveTime()>makespan) makespan = temp.getActiveTime();
             }
             System.out.println("Makespan = " + makespan);
