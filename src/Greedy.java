@@ -31,7 +31,9 @@ public class Greedy {
             for(int i = 0; i < nops; i++){
                 try{
                     int span = Integer.parseInt(data.readLine());
-                    pcs.getMin().getList().addLast(span);
+                    Processor min = pcs.getMin();
+                    min.getList().addLast(span);
+                    pcs.sink(1);
                 }catch(IOException e){
                     e.printStackTrace();
                 }

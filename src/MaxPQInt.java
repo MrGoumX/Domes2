@@ -23,6 +23,12 @@ public interface MaxPQInt<T> {
      */
     public T getMin();
 
+    public void swim(int i);
+
+    public void sink(int i);
+
+    public void swap(int i, int j);
+
     /**
      * prints the priority queue
      */

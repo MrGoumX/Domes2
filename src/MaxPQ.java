@@ -39,18 +39,19 @@ public class MaxPQ<T> implements MaxPQInt<T>{
     public T getMin(){
         if(size==0) throw new IllegalStateException();
         T min = heap[1];
-        sink(1);
         return min;
     }
 
-    private void swim(int i){
+    @Override
+    public void swim(int i){
         while(i > 1){
             if(cmp.compare(heap[i/2], heap[i])>0) swap(i, i/2);
             i = i/2;
         }
     }
 
-    private void sink(int i){
+    @Override
+    public void sink(int i){
         while(2*i <= size){
             int j = 2*i;
             if(j < size && (cmp.compare(heap[j], heap[j+1])>0)) j++;
@@ -60,7 +61,8 @@ public class MaxPQ<T> implements MaxPQInt<T>{
         }
     }
 
-    private void swap(int i, int j){
+    @Override
+    public void swap(int i, int j){
         T temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
