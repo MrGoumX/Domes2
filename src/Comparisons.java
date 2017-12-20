@@ -56,7 +56,7 @@ public class Comparisons {
 
     private static void Greedy(String filename){
         BufferedReader data = null;
-        MaxPQ<Processor> pcs = null;
+        MaxPQ pcs = null;
         int nop = 0, nops = 0, makespan = 0;
         try{
             data = new BufferedReader(new FileReader(filename));
@@ -69,7 +69,7 @@ public class Comparisons {
             }catch(IOException e){
                 System.err.println("Not a number");
             }
-            pcs = new MaxPQ<Processor>(nop, new DefaultComparator<Processor>());
+            pcs = new MaxPQ(nop);
             for(int i = 0; i < nop; i++){
                 pcs.insert(new Processor());
             }
@@ -82,16 +82,14 @@ public class Comparisons {
             for(int i = 0; i < nops; i++){
                 try{
                     int span = Integer.parseInt(data.readLine());
-                    Processor min = pcs.getMin();
-                    min.getList().addLast(span);
-                    pcs.sink(1);
+                    pcs.addProcess(span);
                 }catch(IOException e){
                     e.printStackTrace();
                 }
             }
         }
         for (int i = 0; i < nop; i++) {
-            Processor temp = pcs.removeMin();
+            Processor temp = pcs.removeMax();
             if(temp.getActiveTime()>makespan) makespan = temp.getActiveTime();
         }
         GreedMakespan += makespan;
@@ -99,7 +97,7 @@ public class Comparisons {
 
     private static void GreedyDec(String filename){
         BufferedReader data = null;
-        MaxPQ<Processor> pcs = null;
+        MaxPQ pcs = null;
         Integer procs[];
         int nop = 0, nops = 0, makespan = 0;
         try{
@@ -113,7 +111,7 @@ public class Comparisons {
             } catch (IOException e) {
                 System.err.println("Not a number");
             }
-            pcs = new MaxPQ<Processor>(nop, new DefaultComparator<Processor>());
+            pcs = new MaxPQ(nop);
             for (int i = 0; i < nop; i++) {
                 pcs.insert(new Processor());
             }
@@ -133,12 +131,10 @@ public class Comparisons {
             Sort<Integer> QC = new Sort<Integer>();
             QC.sort(procs, 0, procs.length-1);
             for(int i = 0; i < procs.length; i++){
-                Processor min = pcs.getMin();
-                min.getList().addLast(procs[i]);
-                pcs.sink(1);
+                pcs.addProcess(procs[i]);
             }
             for (int i = 0; i < nop; i++) {
-                Processor temp = pcs.removeMin();
+                Processor temp = pcs.removeMax();
                 if(temp.getActiveTime()>makespan) makespan = temp.getActiveTime();
             }
             GreedDecMakespan += makespan;

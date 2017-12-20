@@ -3,9 +3,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class GreedyDec {
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        GreedyDec();
+    }
+    public static void GreedyDec(){
         BufferedReader data = null;
-        MaxPQ<Processor> pcs = null;
+        MaxPQ pcs = null;
         Integer procs[];
         int nop = 0, nops = 0, makespan = 0;
         try{
@@ -19,7 +22,7 @@ public class GreedyDec {
             } catch (IOException e) {
                 System.err.println("Not a number");
             }
-            pcs = new MaxPQ<Processor>(nop, new DefaultComparator<Processor>());
+            pcs = new MaxPQ(nop);
             for (int i = 0; i < nop; i++) {
                 pcs.insert(new Processor());
             }
@@ -39,12 +42,10 @@ public class GreedyDec {
             Sort<Integer> QC = new Sort<Integer>();
             QC.sort(procs, 0, procs.length-1);
             for(int i = 0; i < procs.length; i++){
-                Processor min = pcs.getMin();
-                min.getList().addLast(procs[i]);
-                pcs.sink(1);
+                pcs.addProcess(procs[i]);
             }
             for (int i = 0; i < nop; i++) {
-                Processor temp = pcs.removeMin();
+                Processor temp = pcs.removeMax();
                 System.out.println("id " + temp.getID() + ", load=" + temp.getActiveTime() + ": " + temp.getList().toString());
                 if(temp.getActiveTime()>makespan) makespan = temp.getActiveTime();
             }

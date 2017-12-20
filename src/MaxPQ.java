@@ -1,15 +1,13 @@
 import java.util.Comparator;
 
-public class MaxPQ<T> implements MaxPQInt<T>{
-    private T[] heap;
+public class MaxPQ implements MaxPQInt{
+    private Processor[] heap;
     private int size;
-    protected Comparator<T> cmp;
 
-    public MaxPQ(int cap, Comparator<T> cmp){
+    public MaxPQ(int cap){
         if(cap < 1) throw new IllegalArgumentException();
-        this.heap = (T[]) new Object[cap+1];
+        this.heap = new Processor[cap+1];
         this.size = 0;
-        this.cmp = cmp;
     }
 
     @Override
@@ -18,7 +16,7 @@ public class MaxPQ<T> implements MaxPQInt<T>{
     }
 
     @Override
-    public void insert(T object){
+    public void insert(Processor object){
         if(object==null) throw new IllegalArgumentException();
         if(size == heap.length-1) throw new IllegalStateException();
         heap[++size] = object;
@@ -26,9 +24,9 @@ public class MaxPQ<T> implements MaxPQInt<T>{
     }
 
     @Override
-    public T removeMin(){
+    public Processor removeMax(){
         if(size==0) throw new IllegalStateException();
-        T object = heap[1];
+        Processor object = heap[1];
         if(size > 1) heap[1] = heap[size];
         heap[size--] = null;
         sink(1);
@@ -36,34 +34,38 @@ public class MaxPQ<T> implements MaxPQInt<T>{
     }
 
     @Override
-    public T getMin(){
+    public Processor getMax(){
         if(size==0) throw new IllegalStateException();
-        T min = heap[1];
+        Processor min = heap[1];
         return min;
     }
 
-    @Override
-    public void swim(int i){
+    private void swim(int i){
         while(i > 1){
-            if(cmp.compare(heap[i/2], heap[i])>0) swap(i, i/2);
+            if(heap[i/2].compareTo(heap[i])>0) swap(i, i/2);
             i = i/2;
         }
     }
 
-    @Override
-    public void sink(int i){
+    private void sink(int i){
         while(2*i <= size){
             int j = 2*i;
-            if(j < size && (cmp.compare(heap[j], heap[j+1])>0)) j++;
-            if(!(cmp.compare(heap[i], heap[j])>0)) break;
+            if(j < size && (heap[j].compareTo(heap[j+1])>0)) j++;
+            if(!(heap[i].compareTo(heap[j])>0)) break;
             swap(i, j);
             i = j;
         }
     }
 
     @Override
-    public void swap(int i, int j){
-        T temp = heap[i];
+    public void addProcess(int ms){
+        Processor min = getMax();
+        min.getList().addLast(ms);
+        sink(1);
+    }
+
+    private void swap(int i, int j){
+        Processor temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
     }
@@ -71,7 +73,7 @@ public class MaxPQ<T> implements MaxPQInt<T>{
     @Override
     public void print(){
         for(int i=1; i <= size; i++){
-            System.out.println(heap[i]);
+            System.out.println(heap[i].getActiveTime());
         }
     }
 
